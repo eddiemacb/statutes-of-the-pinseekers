@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Statutes of the Pinseekers</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Special+Elite&display=swap">
+<style>
+  :root{
+    --paper: #f1efe2;
+    --paper-edge: #e6e2cf;
+    --ink: #24301f;
+    --ink-soft: #4a5640;
+    --green: #23593d;
+    --green-deep: #16341f;
+    --gold: #9c7a2e;
+    --gold-bright: #b8912f;
+    --rule: rgba(36,48,31,0.22);
+    --rule-soft: rgba(36,48,31,0.12);
+    --stamp-bg: rgba(156,122,46,0.1);
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper: #1b2420;
+      --paper-edge: #141c18;
+      --ink: #e9e6d8;
+      --ink-soft: #b9c0ae;
+      --green: #6fae8c;
+      --green-deep: #a7d3ba;
+      --gold: #d1ab54;
+      --gold-bright: #e3c06e;
+      --rule: rgba(233,230,216,0.22);
+      --rule-soft: rgba(233,230,216,0.1);
+      --stamp-bg: rgba(209,171,84,0.12);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper: #1b2420;
+    --paper-edge: #141c18;
+    --ink: #e9e6d8;
+    --ink-soft: #b9c0ae;
+    --green: #6fae8c;
+    --green-deep: #a7d3ba;
+    --gold: #d1ab54;
+    --gold-bright: #e3c06e;
+    --rule: rgba(233,230,216,0.22);
+    --rule-soft: rgba(233,230,216,0.1);
+    --stamp-bg: rgba(209,171,84,0.12);
+  }
+
+  *{ box-sizing: border-box; }
+
+  body{
+    margin: 0;
+    background: var(--paper-edge);
+    color: var(--ink);
+    font-family: 'Spectral', Georgia, 'Times New Roman', serif;
+    padding: clamp(20px, 5vw, 56px) clamp(12px, 4vw, 40px) 80px;
+    background-image:
+      radial-gradient(circle at 1px 1px, var(--rule-soft) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+
+  .sheet{
+    max-width: 760px;
+    margin: 0 auto;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    box-shadow: 0 1px 0 var(--rule-soft) inset, 0 18px 40px -28px rgba(0,0,0,0.5);
+    padding: clamp(28px, 6vw, 64px) clamp(24px, 7vw, 72px);
+    position: relative;
+  }
+  .sheet::before{
+    content: "";
+    position: absolute;
+    inset: 10px;
+    border: 1px solid var(--rule-soft);
+    pointer-events: none;
+  }
+
+  .seal{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 18px;
+  }
+  .seal svg{ width: 76px; height: 76px; }
+
+  header{ text-align: center; margin-bottom: 8px; }
+
+  .kicker{
+    font-family: 'Special Elite', 'Courier New', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  h1{
+    font-family: 'IM Fell English SC', 'IM Fell English', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(2rem, 5.4vw, 2.9rem);
+    letter-spacing: 0.02em;
+    line-height: 1.15;
+    color: var(--green-deep);
+    text-wrap: balance;
+    margin: 10px 0 6px;
+  }
+
+  .subtitle{
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+    max-width: 46ch;
+    margin: 0 auto 20px;
+    text-wrap: balance;
+  }
+
+  .rule{
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 26px 0;
+  }
+  .rule.thick{ border-top-width: 3px; border-top-color: var(--gold); opacity: 0.55; }
+
+  .preamble{
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--ink);
+    margin: 0 auto 4px;
+    max-width: 64ch;
+  }
+  .preamble .whereas{
+    font-family: 'Special Elite', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    margin-right: 0.35em;
+  }
+  .preamble p{ margin: 0 0 14px; }
+  .preamble p:last-child{ margin-bottom: 0; }
+
+  h2.article{
+    font-family: 'IM Fell English SC', Georgia, serif;
+    font-weight: 400;
+    font-size: 1.5rem;
+    letter-spacing: 0.04em;
+    color: var(--green);
+    text-align: center;
+    margin: 0 0 4px;
+  }
+  .article-desc{
+    text-align: center;
+    font-family: 'Special Elite', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 22px;
+  }
+
+  dl.terms{ margin: 0; }
+  dl.terms div{
+    display: grid;
+    grid-template-columns: minmax(120px, auto) 1fr;
+    gap: 4px 18px;
+    padding: 10px 0;
+    border-bottom: 1px dotted var(--rule);
+  }
+  dl.terms div:last-child{ border-bottom: none; }
+  dl.terms dt{
+    font-family: 'IM Fell English', Georgia, serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--green-deep);
+    white-space: nowrap;
+  }
+  dl.terms dd{ margin: 0; line-height: 1.6; }
+
+  ol.sections{
+    counter-reset: sec;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  ol.sections > li{
+    counter-increment: sec;
+    position: relative;
+    padding: 16px 0 16px 3.1em;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  ol.sections > li:last-child{ border-bottom: none; }
+  ol.sections > li::before{
+    content: "§" counter(sec);
+    position: absolute;
+    left: 0;
+    top: 16px;
+    font-family: 'Special Elite', monospace;
+    font-size: 0.85rem;
+    color: var(--gold);
+    background: var(--stamp-bg);
+    padding: 3px 7px;
+    border: 1px solid var(--rule);
+  }
+  .sec-title{
+    font-family: 'IM Fell English', Georgia, serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--ink);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .sec-body{ line-height: 1.65; }
+  .sec-fine{
+    display: inline-block;
+    margin-top: 8px;
+    font-family: 'Special Elite', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: var(--green-deep);
+    background: var(--stamp-bg);
+    border: 1px solid var(--rule);
+    padding: 3px 8px;
+  }
+
+  .table-wrap{ overflow-x: auto; margin-top: 4px; }
+  table.fines{
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    min-width: 480px;
+  }
+  table.fines caption{ display:none; }
+  table.fines th, table.fines td{
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--rule-soft);
+    vertical-align: top;
+  }
+  table.fines thead th{
+    font-family: 'Special Elite', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border-bottom: 2px solid var(--rule);
+  }
+  table.fines td.sec{
+    font-family: 'Special Elite', monospace;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+  table.fines td.amt{
+    font-family: 'Special Elite', monospace;
+    font-variant-numeric: tabular-nums;
+    color: var(--green-deep);
+    font-weight: 700;
+    white-space: nowrap;
+    text-align: right;
+  }
+  table.fines th.amt{ text-align: right; }
+
+  .signoff{
+    margin-top: 8px;
+    line-height: 1.75;
+  }
+  .sig-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 32px;
+    margin-top: 28px;
+  }
+  @media (max-width: 480px){ .sig-grid{ grid-template-columns: 1fr; } }
+  .sig-line{
+    border-bottom: 1px solid var(--ink-soft);
+    height: 34px;
+  }
+  .sig-label{
+    font-family: 'Special Elite', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-top: 6px;
+  }
+
+  footer{
+    text-align: center;
+    margin-top: 30px;
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+  }
+  .ratified{
+    text-align: center;
+    font-family: 'Special Elite', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    margin-top: 26px;
+  }
+</style>
+</head>
+<body>
+
+<div class="sheet">
+
+  <div class="seal" aria-hidden="true">
+    <svg viewBox="0 0 100 100" fill="none">
+      <circle cx="50" cy="50" r="47" stroke="var(--gold)" stroke-width="1.5"/>
+      <circle cx="50" cy="50" r="40" stroke="var(--rule)" stroke-width="1"/>
+      <g fill="var(--green)">
+        <circle cx="50" cy="46" r="12"/>
+      </g>
+      <g fill="var(--paper)" opacity="0.9">
+        <circle cx="45" cy="41" r="1.4"/><circle cx="52" cy="40" r="1.4"/><circle cx="58" cy="45" r="1.4"/>
+        <circle cx="43" cy="48" r="1.4"/><circle cx="50" cy="47" r="1.4"/><circle cx="56" cy="51" r="1.4"/>
+        <circle cx="46" cy="54" r="1.4"/><circle cx="53" cy="53" r="1.4"/>
+      </g>
+      <line x1="50" y1="58" x2="50" y2="78" stroke="var(--green-deep)" stroke-width="1.5"/>
+      <path d="M50 58 L68 63 L50 68 Z" fill="var(--gold)"/>
+    </svg>
+  </div>
+
+  <header>
+    <div class="kicker">Ratified by the Foursome &middot; Enforceable at the Bar</div>
+    <h1>Statutes of the&nbsp;Pinseekers</h1>
+    <p class="subtitle">Being the Charter, Code of Conduct, and Schedule of Fines governing the Weekly Round, drafted in the spirit of fairness and enforced in the spirit of spite.</p>
+  </header>
+
+  <hr class="rule thick">
+
+  <div class="preamble">
+    <p><span class="whereas">WHEREAS</span> the undersigned Members have played golf together weekly for longer than any of them can accurately recall, and have accumulated grievances in proportion;</p>
+    <p><span class="whereas">WHEREAS</span> disputes over etiquette, curses, mulligans, and unpaid skins have historically been settled by shouting on the 9th tee, to the detriment of pace of play and civility;</p>
+    <p><span class="whereas">WHEREAS</span> a golf ball does not know it has been complimented, and yet somehow always seems to know;</p>
+    <p>the Members do hereby ordain and establish this Charter, to be interpreted liberally in favor of whoever is currently losing.</p>
+  </div>
+
+  <hr class="rule">
+
+  <h2 class="article">Article I</h2>
+  <p class="article-desc">Definitions</p>
+  <dl class="terms">
+    <div><dt>The Jinx</dt><dd>Any verbal compliment, encouragement, or prediction of success offered before a shot's outcome is final. See §1.</dd></div>
+    <div><dt>The Pot</dt><dd>The communal fund into which all fines are paid, disbursed at season's end toward drinks, dinner, or a trophy of deliberately poor taste.</dd></div>
+    <div><dt>The Starter</dt><dd>Any Member designated to witness this Charter's signing. Holds no enforcement power, but is listened to anyway.</dd></div>
+    <div><dt>Commissioner</dt><dd>The Member who posted the worst score in the preceding round. Serves a one-week term breaking tied rulings, as penance.</dd></div>
+    <div><dt>Leather</dt><dd>The traditional maximum distance a putt may be conceded as a "gimme" — the length of a grip laid flat, no longer.</dd></div>
+  </dl>
+
+  <hr class="rule">
+
+  <h2 class="article">Article II</h2>
+  <p class="article-desc">Rules of Conduct &amp; Etiquette</p>
+
+  <ol class="sections">
+    <li>
+      <span class="sec-title">The Curse of the Compliment</span>
+      <span class="sec-body">No Member shall say "nice putt," "you're good," "that's in," or any equivalent phrase before a ball has come to rest in the hole. The putter is entitled, and encouraged, to blame any resulting miss entirely on the speaker.</span>
+      <span class="sec-fine">Fine — see Art. III §1</span>
+    </li>
+    <li>
+      <span class="sec-title">Premature Fairway Call</span>
+      <span class="sec-body">Declaring a tee shot "in the fairway" or "safe" before it has landed and stopped moving invites identical misfortune and identical blame.</span>
+      <span class="sec-fine">Fine — see Art. III §2</span>
+    </li>
+    <li>
+      <span class="sec-title">Breach of the Silent Backswing</span>
+      <span class="sec-body">No talking, cart engines, club rattling, or ringtones during another Member's takeaway. The window of silence begins at the waggle and ends at contact.</span>
+      <span class="sec-fine">Fine — see Art. III §3</span>
+    </li>
+    <li>
+      <span class="sec-title">The Undeclared Mulligan</span>
+      <span class="sec-body">A second ball may be played from the tee only if the word "mulligan" is spoken aloud before the club is taken back. A silently re-teed ball counts, no exceptions, no appeals.</span>
+      <span class="sec-fine">Fine — see Art. III §4</span>
+    </li>
+    <li>
+      <span class="sec-title">Blaming the Equipment</span>
+      <span class="sec-body">Attributing a poor shot to one's clubs, grips, balls, shoes, or "the wind that only I felt" is permitted but not free of charge.</span>
+      <span class="sec-fine">Fine — see Art. III §5</span>
+    </li>
+    <li>
+      <span class="sec-title">The Extended Brag</span>
+      <span class="sec-body">A Member may celebrate a genuinely good shot for the remainder of that hole and the one following. Any mention beyond the second subsequent tee box is taxed per additional hole.</span>
+      <span class="sec-fine">Fine — see Art. III §6</span>
+    </li>
+    <li>
+      <span class="sec-title">Unsolicited Swing Advice</span>
+      <span class="sec-body">No Member below a demonstrated handicap advantage of at least five strokes over the listener may offer swing tips unasked. Advice must be requested in clear, unambiguous language.</span>
+      <span class="sec-fine">Fine — see Art. III §7</span>
+    </li>
+    <li>
+      <span class="sec-title">Failure to Rake or Repair</span>
+      <span class="sec-body">Bunkers shall be raked and pitch marks repaired before the offending Member leaves the green or bunker. Discovery by a later group is a strict-liability offense.</span>
+      <span class="sec-fine">Fine — see Art. III §8</span>
+    </li>
+    <li>
+      <span class="sec-title">The Visible or Audible Phone</span>
+      <span class="sec-body">Phones must be silenced for the round. A phone that rings, buzzes audibly, or is visibly consulted during another Member's swing is a violation regardless of intent.</span>
+      <span class="sec-fine">Fine — see Art. III §9</span>
+    </li>
+    <li>
+      <span class="sec-title">Failure to Be Ready</span>
+      <span class="sec-body">A Member whose turn is approaching must be club-in-hand and thinking about the shot, not the previous hole's argument, by the time play reaches them.</span>
+      <span class="sec-fine">Fine — see Art. III §10</span>
+    </li>
+    <li>
+      <span class="sec-title">The Generous Self-Gimme</span>
+      <span class="sec-body">No Member may concede their own putt as "good" beyond one leather's length without a second Member's independent confirmation.</span>
+      <span class="sec-fine">Fine — see Art. III §11</span>
+    </li>
+    <li>
+      <span class="sec-title">Late Settlement of Wagers</span>
+      <span class="sec-body">All skins, presses, and side bets are due and payable before the group leaves the 19th hole. Debts carried home accrue interest at the Commissioner's discretion.</span>
+      <span class="sec-fine">Fine — see Art. III §12</span>
+    </li>
+  </ol>
+
+  <hr class="rule">
+
+  <h2 class="article">Article III</h2>
+  <p class="article-desc">Schedule of Fines, Payable to the Pot</p>
+
+  <div class="table-wrap">
+    <table class="fines">
+      <thead>
+        <tr><th>§</th><th>Violation</th><th class="amt">Fine</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="sec">1</td><td>The Curse of the Compliment</td><td class="amt">$5</td></tr>
+        <tr><td class="sec">2</td><td>Premature Fairway Call</td><td class="amt">$2</td></tr>
+        <tr><td class="sec">3</td><td>Breach of the Silent Backswing</td><td class="amt">$5</td></tr>
+        <tr><td class="sec">4</td><td>The Undeclared Mulligan</td><td class="amt">$3</td></tr>
+        <tr><td class="sec">5</td><td>Blaming the Equipment</td><td class="amt">$2</td></tr>
+        <tr><td class="sec">6</td><td>The Extended Brag <em>(per hole over limit)</em></td><td class="amt">$3</td></tr>
+        <tr><td class="sec">7</td><td>Unsolicited Swing Advice</td><td class="amt">$2</td></tr>
+        <tr><td class="sec">8</td><td>Failure to Rake or Repair</td><td class="amt">$5</td></tr>
+        <tr><td class="sec">9</td><td>The Visible or Audible Phone</td><td class="amt">$5</td></tr>
+        <tr><td class="sec">10</td><td>Failure to Be Ready</td><td class="amt">$2</td></tr>
+        <tr><td class="sec">11</td><td>The Generous Self-Gimme</td><td class="amt">$5</td></tr>
+        <tr><td class="sec">12</td><td>Late Settlement of Wagers</td><td class="amt">$10&nbsp;+&nbsp;doubling</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="rule">
+
+  <h2 class="article">Article IV</h2>
+  <p class="article-desc">Enforcement &amp; Adjudication</p>
+  <div class="preamble">
+    <p>Any Member may call a violation upon its occurrence. A call made more than one hole after the offense is void for staleness.</p>
+    <p>Disputed calls are settled by majority vote of Members present. A tied vote is broken by the Commissioner, whose ruling may not be appealed, questioned, or brought up again on the drive home.</p>
+    <p>Fines are payable on the spot, in cash, or by written IOU redeemable no later than the following round's first tee.</p>
+  </div>
+
+  <hr class="rule">
+
+  <h2 class="article">Article V</h2>
+  <p class="article-desc">Amendments</p>
+  <div class="preamble">
+    <p>This Charter may be amended by unanimous consent of all Members present, given no earlier than the 19th hole and no later than the second round of drinks.</p>
+  </div>
+
+  <hr class="rule thick">
+
+  <div class="signoff">
+    <p>IN WITNESS WHEREOF, the undersigned Members, being of reasonably sound mind for a Saturday morning, do hereby subscribe to this Charter and submit themselves to its fines, in full knowledge of what they've agreed to.</p>
+    <div class="sig-grid">
+      <div><div class="sig-line"></div><div class="sig-label">Member — Signature</div></div>
+      <div><div class="sig-line"></div><div class="sig-label">Member — Signature</div></div>
+      <div><div class="sig-line"></div><div class="sig-label">Member — Signature</div></div>
+      <div><div class="sig-line"></div><div class="sig-label">Member — Signature</div></div>
+    </div>
+    <div class="sig-grid" style="margin-top:8px;">
+      <div><div class="sig-line"></div><div class="sig-label">Witnessed by — The Starter</div></div>
+      <div><div class="sig-line"></div><div class="sig-label">Date</div></div>
+    </div>
+  </div>
+
+  <p class="ratified">Ratified this day, upon the 19th hole, in the presence of empty glasses.</p>
+
+  <footer>This Charter is binding in honor only and is not enforceable in any court of law — only in the parking lot afterward.</footer>
+
+</div>
+</body>
+</html>
